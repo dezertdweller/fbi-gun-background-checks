@@ -13,7 +13,8 @@ def load_data():
     return df
 
 def remove_commas(df):
-    df = df.apply(lambda x: x.str.replace(',', ''))
+    for col in df.columns[1:]: #Exclude 'Fact' column
+        df[col] = df[col].str.replace(',', '')
     return df
 
 def print_head(df):
@@ -26,6 +27,7 @@ def save_cleaned_data(df):
 if __name__ in '__main__':
     df = load_data()
     rc = remove_commas(df)
+    print_head(rc)
     save_cleaned_data(rc)
 
 
