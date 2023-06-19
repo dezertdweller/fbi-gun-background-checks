@@ -35,6 +35,16 @@ not the entire DataFrame at once. To convert all percentages in the DataFrame,
 I need to  apply this function to each cell in the DataFrame, which can be done 
 with the applymap() function in if __name..."""
 
+def remove_dollar(df):
+    for col in df.columns[1:]: #Exclude 'Fact' column
+        df[col] = df[col].apply(lambda x: -float(x.replace("-", "").replace("$", "")) if isinstance(x, str) and x.startswith("-") else (float(x.replace("$", "")) if isinstance(x, str) and "$" in x else x))
+    return df
+
+def convert_to_numbers(df):
+    for col in df.columns[1:]:
+        df[col] = pd.to_numeric(df[col], errors='coerce')
+    return df
+
 def save_cleaned_data(df):
     df = df.to_csv('/Users/katialopes-gilbert/data-files/ncis-and-census-data/us-census-data-cleaned.csv', index=False)
     return df
@@ -43,8 +53,10 @@ if __name__ in '__main__':
     df = load_data()
     rc = remove_commas(df)
     cp = df.applymap(convert_percentages)
-    print_head(cp)
-    save_cleaned_data(cp)
+    rd = remove_dollar(cp)
+    df = convert_to_numbers(rd)
+    print_head(df)
+    save_cleaned_data(df)
 
 
 
