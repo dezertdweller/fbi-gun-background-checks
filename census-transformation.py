@@ -25,6 +25,10 @@ def remove_rows_and_columns(df):
                      'Value Notes', '1', 'Fact Notes', '(a)', '(b)', '(c)', 
                      'Value Flags', '-', 'D', 'F', 'FN', 'S', 'X', 'Z']
     df = df[~df['Fact'].isin(unwanted_rows)]
+
+    # Remove null rows
+    df = df.dropna(how='all')
+
     return df
     
 def save_transformed_data(df):
