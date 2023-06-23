@@ -21,6 +21,24 @@ def date_time(df):
     df['month'] = pd.to_datetime(df['month'])
     return df
 
+def drop_columns(df):
+    columns_to_drop = ['permit', 'permit_recheck', 'admin', 'prepawn_handgun',
+                   'prepawn_long_gun', 'prepawn_other', 'redemption_handgun',
+                   'redemption_long_gun', 'redemption_other', 'returned_handgun',
+                   'returned_long_gun', 'returned_other', 'rentals_handgun',
+                   'rentals_long_gun', 'totals']
+
+    df.drop(columns_to_drop, axis=1, inplace=True)
+    return df
+
+def sum_permits(df):
+    columns_to_sum = ['handgun', 'long_gun', 'other', 'multiple', 'private_sale_handgun',
+                  'private_sale_long_gun', 'private_sale_other', 'return_to_seller_handgun',
+                  'return_to_seller_long_gun', 'return_to_seller_other']
+
+    df['total_permits'] = df[columns_to_sum].sum(axis=1)
+    return df
+
 def save_transformed_data(df):
     df = df.to_csv('/Users/katialopes-gilbert/data-files/ncis-and-census-data/gun_data_clean.csv', index=False)
     return df
@@ -29,4 +47,6 @@ if __name__ in '__main__':
    df = convert_to_csv()
    df = load_data()
    df = date_time(df)
+   df = drop_columns(df)
+   df = sum_permits(df)
    df = save_transformed_data(df)
