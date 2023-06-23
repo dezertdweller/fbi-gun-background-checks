@@ -30,6 +30,10 @@ def transform_data(df):
     df = df.rename(columns={'index': 'State'})
     return df
 
+def round_numbers(df):
+    df = df.round(3)
+    return df
+
 def save_transformed_data(df):
     df = df.to_csv('/Users/katialopes-gilbert/data-files/ncis-and-census-data/us-census-data-transformed.csv', index=False)
     return df
@@ -38,4 +42,5 @@ if __name__ in '__main__':
     df = load_data()
     df = remove_rows_and_columns(df)
     df = transform_data(df)
+    df = round_numbers(df)
     save_transformed_data(df)
