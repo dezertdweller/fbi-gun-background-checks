@@ -10,12 +10,6 @@ def load_data():
     df = pd.read_csv('/Users/katialopes-gilbert/data-files/ncis-and-census-data/us-census-data-cleaned.csv')
     return df
 
-def print_head(df):
-    print(df.head())
-
-def print_info(df):
-    print(df.info())
-
 def remove_rows_and_columns(df):
     # Remove columns
     df = df.drop(['Fact Note'], axis=1)
@@ -30,7 +24,12 @@ def remove_rows_and_columns(df):
     df = df.dropna(how='all')
 
     return df
-    
+
+def transform_data(df):
+    df = df.set_index('Fact').transpose().reset_index()
+    df = df.rename(columns={'index': 'State'})
+    return df
+
 def save_transformed_data(df):
     df = df.to_csv('/Users/katialopes-gilbert/data-files/ncis-and-census-data/us-census-data-transformed.csv', index=False)
     return df
@@ -38,6 +37,5 @@ def save_transformed_data(df):
 if __name__ in '__main__':
     df = load_data()
     df = remove_rows_and_columns(df)
-    print_head(df)
-    print_info(df)
+    df = transform_data(df)
     save_transformed_data(df)
