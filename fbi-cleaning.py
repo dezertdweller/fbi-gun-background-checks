@@ -17,6 +17,16 @@ def load_data():
     df = pd.read_csv('/Users/katialopes-gilbert/data-files/ncis-and-census-data/gun_data.csv')
     return df
 
+def date_time(df):
+    df['month'] = pd.to_datetime(df['month'])
+    return df
+
+def save_transformed_data(df):
+    df = df.to_csv('/Users/katialopes-gilbert/data-files/ncis-and-census-data/gun_data_clean.csv', index=False)
+    return df
+
 if __name__ in '__main__':
    df = convert_to_csv()
    df = load_data()
+   df = date_time(df)
+   df = save_transformed_data(df)
