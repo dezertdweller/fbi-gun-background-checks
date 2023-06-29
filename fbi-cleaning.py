@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
+import datetime
 import openpyxl
 
 sns.set_style('darkgrid')
@@ -19,6 +20,8 @@ def load_data():
 
 def date_time(df):
     df['month'] = pd.to_datetime(df['month'])
+    df.insert(1, 'year', df['month'].dt.year.astype(int))
+    df.insert(1, 'month-name', df['month'].dt.strftime('%B'))
     return df
 
 def drop_columns(df):
