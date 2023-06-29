@@ -34,6 +34,12 @@ def drop_columns(df):
     df.drop(columns_to_drop, axis=1, inplace=True)
     return df
 
+def drop_rows(df):
+    unwanted_rows = ['District of Columbia', 'Guam', 'Mariana Islands', 'Puerto Rico', 'Virgin Islands']
+    df = df[~df['state'].isin(unwanted_rows)]
+    df = df.dropna(how='all')
+    return df
+
 def sum_permits(df):
     columns_to_sum = ['handgun', 'long_gun', 'other', 'multiple', 'private_sale_handgun',
                   'private_sale_long_gun', 'private_sale_other', 'return_to_seller_handgun',
@@ -51,5 +57,6 @@ if __name__ in '__main__':
    df = load_data()
    df = date_time(df)
    df = drop_columns(df)
+   df = drop_rows(df)
    df = sum_permits(df)
    df = save_transformed_data(df)
