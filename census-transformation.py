@@ -32,7 +32,8 @@ def transform_data(df):
 
 def simplify_data(df):
     df = df.rename(columns = {
-         'Population estimates, July 1, 2016,  (V2016)':'Population 2016', 
+         'Population estimates, July 1, 2016,  (V2016)':'Population 2016',
+         'Population estimates base, April 1, 2010,  (V2016)':'Population 2010', 
          'Population, percent change - April 1, 2010 (estimates base) to July 1, 2016,  (V2016)':'Population Percent Change 2010-2016', 
          'Persons under 5 years, percent, July 1, 2016,  (V2016)':'Under 5',
          'Persons under 18 years, percent, July 1, 2016,  (V2016)':'Under 18',
