@@ -48,7 +48,7 @@ def sum_permits(df):
     df['total_permits'] = df[columns_to_sum].sum(axis=1)
     return df
 
-def save_transformed_data(df):
+def save_data(df):
     df = df.to_csv('/Users/katialopes-gilbert/data-files/ncis-and-census-data/gun_data_clean.csv', index=False)
     return df
 
@@ -59,4 +59,4 @@ if __name__ in '__main__':
    df = drop_columns(df)
    df = drop_rows(df)
    df = sum_permits(df)
-   df = save_transformed_data(df)
+   df = save_data(df)
