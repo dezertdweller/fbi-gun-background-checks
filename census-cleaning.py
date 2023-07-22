@@ -45,7 +45,7 @@ def convert_to_numbers(df):
         df[col] = pd.to_numeric(df[col], errors='coerce')
     return df
 
-def save_cleaned_data(df):
+def save_data(df):
     df = df.to_csv('/Users/katialopes-gilbert/data-files/ncis-and-census-data/us-census-data-cleaned.csv', index=False)
     return df
 
@@ -56,7 +56,7 @@ if __name__ in '__main__':
     rd = remove_dollar(cp)
     df = convert_to_numbers(rd)
     print_head(df)
-    save_cleaned_data(df)
+    save_data(df)
 
 
 
