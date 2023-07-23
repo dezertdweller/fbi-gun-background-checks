@@ -6,8 +6,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import openpyxl
 
-sns.set_style('darkgrid')
-
 def load_data():
     df = pd.read_csv('/Users/katialopes-gilbert/data-files/ncis-and-census-data/us-census-data.csv')
     return df
@@ -15,12 +13,12 @@ def load_data():
 def print_head(df):
     print(df.head())
 
-def remove_commas(df):
+def remove_commas(df): #Remove commas from the dataset
     for col in df.columns[1:]: #Exclude 'Fact' column
         df[col] = df[col].str.replace(',', '')
     return df
 
-def convert_percentages(x):
+def convert_percentages(x): #Convert percentages into their decimal values for analysis.
      if isinstance(x, str):
         x = x.strip()
         if "%" in x:
@@ -30,17 +28,12 @@ def convert_percentages(x):
                 return float(x.replace("%", "")) / 100
      return x
 
-"""This function is designed to operate on an individual cell of the DataFrame, 
-not the entire DataFrame at once. To convert all percentages in the DataFrame, 
-I need to  apply this function to each cell in the DataFrame, which can be done 
-with the applymap() function in if __name..."""
-
-def remove_dollar(df):
-    for col in df.columns[1:]: #Exclude 'Fact' column
+def remove_dollar(df): #Remove dollar signs from the dataset for analysis.
+    for col in df.columns[1:]:
         df[col] = df[col].apply(lambda x: -float(x.replace("-", "").replace("$", "")) if isinstance(x, str) and x.startswith("-") else (float(x.replace("$", "")) if isinstance(x, str) and "$" in x else x))
     return df
 
-def convert_to_numbers(df):
+def convert_to_numbers(df): #Convert all columns except for the Fact column into numbers.
     for col in df.columns[1:]:
         df[col] = pd.to_numeric(df[col], errors='coerce')
     return df
