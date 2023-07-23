@@ -51,10 +51,10 @@ def save_data(df):
 
 if __name__ in '__main__':
     df = load_data()
-    rc = remove_commas(df)
-    cp = df.applymap(convert_percentages)
-    rd = remove_dollar(cp)
-    df = convert_to_numbers(rd)
+    df = remove_commas(df)
+    df = df.applymap(convert_percentages)
+    df = remove_dollar(df)
+    df = convert_to_numbers(df)
     print_head(df)
     save_data(df)
 
