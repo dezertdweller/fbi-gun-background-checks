@@ -1,2 +1,4 @@
 # fbi-gun-background-checks
-Udacity project for my data analyst course. 
+This is my project for my Udacity data analyst course. 
+
+Check out the report file called investigate-a-dataset-project-klg.
