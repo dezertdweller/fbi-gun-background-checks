@@ -102,6 +102,11 @@ def simplify_data(df):
 
     return df
 
+
+def fill_null_values(df):
+    df = df.fillna(0)
+    return df
+
 def round_numbers(df):
     df = df.round(3)
     return df
@@ -115,5 +120,6 @@ if __name__ in '__main__':
     df = remove_rows_and_columns(df)
     df = transform_data(df)
     df = simplify_data(df)
+    df = fill_null_values(df)
     df = round_numbers(df)
     save_data(df)
